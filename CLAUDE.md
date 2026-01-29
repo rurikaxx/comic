@@ -30,6 +30,9 @@ src/comic/
 # Install
 pip install .
 
+# Install (development, 修改程式碼後不需重新安裝)
+pip install -e .
+
 # Run
 comic-dl <gallery_id>
 python -m comic <gallery_id>
@@ -44,7 +47,7 @@ python -m comic <gallery_id>
 - Language: Chinese (Traditional) for user-facing messages and commit messages
 - All user-facing CLI output is in Chinese
 - Title priority for directory naming: japanese > chinese > english, spaces removed
-- Images saved to `storage/{sanitized_title}/`
+- Images saved to `{cwd}/{sanitized_title}/`
 - Async concurrent downloads with semaphore limit of 5
 - Failed downloads retry up to 3 times
-- 下載完成後提示使用者修改目錄名稱，預設帶入原始名稱
+- 下載完成後提示使用者修改目錄名稱，使用 readline 預填原始名稱（可直接編輯），Windows 無 readline 時 fallback 為 click.prompt

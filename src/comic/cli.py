@@ -2,6 +2,11 @@ import asyncio
 import re
 from pathlib import Path
 
+try:
+    import readline
+except ImportError:
+    readline = None
+
 import click
 
 from comic.api import fetch_gallery
@@ -41,7 +46,18 @@ async def _run(gallery_id: str) -> None:
     success = total - len(failed)
     print(f"完成！成功下載 {success}/{total} 張圖片")
 
-    new_name = click.prompt("輸入目錄名稱", default=dir_name).strip()
+    if readline is not None:
+        def _prefill_hook():
+            readline.insert_text(dir_name)
+            readline.redisplay()
+        readline.set_pre_input_hook(_prefill_hook)
+        try:
+            new_name = input("輸入目錄名稱：").strip()
+        finally:
+            readline.set_pre_input_hook()
+    else:
+        new_name = click.prompt("輸入目錄名稱", default=dir_name).strip()
+
     if new_name != dir_name:
         new_dir = output_dir.parent / new_name
         output_dir.rename(new_dir)
