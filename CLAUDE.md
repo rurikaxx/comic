@@ -47,3 +47,4 @@ python -m comic <gallery_id>
 - Images saved to `storage/{sanitized_title}/`
 - Async concurrent downloads with semaphore limit of 5
 - Failed downloads retry up to 3 times
+- 下載完成後提示使用者修改目錄名稱，預設帶入原始名稱

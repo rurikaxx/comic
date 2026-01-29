@@ -41,6 +41,12 @@ async def _run(gallery_id: str) -> None:
     success = total - len(failed)
     print(f"完成！成功下載 {success}/{total} 張圖片")
 
+    new_name = click.prompt("輸入目錄名稱", default=dir_name).strip()
+    if new_name != dir_name:
+        new_dir = output_dir.parent / new_name
+        output_dir.rename(new_dir)
+        print(f"已重新命名為：{new_dir}")
+
 
 @click.command()
 @click.argument("gallery_id")
