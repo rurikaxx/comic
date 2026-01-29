@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "comic-dl"
+version = "0.1.0"
+description = "Download comics from nhentai.net"
+requires-python = ">=3.9"
+dependencies = [
+    "aiohttp>=3.9",
+    "Pillow>=10.0",
+    "click>=8.0",
+]
+
+[project.scripts]
+comic-dl = "comic.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
